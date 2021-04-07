@@ -26,7 +26,7 @@
             android:gravity="center"
             android:text="Hello Student"
             android:textColor="#ffc75f"
-            android:textSize="41dp"
+            android:textSize="45dp"
 
             android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
             android:hint="Username"
             android:padding="10dp"
             android:textColorHint="@color/white"
-            android:textSize="2sp" />
+            android:textSize="22sp" />
 
         <EditText
             android:id="@+id/password"
