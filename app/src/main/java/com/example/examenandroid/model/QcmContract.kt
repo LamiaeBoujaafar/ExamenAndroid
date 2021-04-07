@@ -14,7 +14,7 @@ object QcmContract {
                                         "${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
                                         "$COLUMN_NOM TEXT)"
 
-        const val SQL_DROP_TABLE = "DROP TABLE IF EXISTS $TABLE_NAME_CHAPITRE"
+        const val DROP_TABLE_CHAPITRE = "DROP TABLE IF EXISTS $TABLE_NAME_CHAPITRE"
 
     }
 
@@ -33,7 +33,7 @@ object QcmContract {
                 "$COLUMN_EST_CORRECTE BOOLEAN," +
                 " FOREIGN KEY ("+ COLUMN_ID_QUESTION+") REFERENCES " + Chapitre.TABLE_NAME_CHAPITRE+ "(" + Chapitre.COLUMN_ID + ") )"
 
-        const val SQL_DROP_TABLE = "DROP TABLE IF EXISTS $TABLE_NAME_REPONSE"
+        const val DROP_TABLE_REPONSE = "DROP TABLE IF EXISTS $TABLE_NAME_REPONSE"
 
     }
 
