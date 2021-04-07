@@ -8,7 +8,7 @@ import com.example.examenandroid.model.QcmContract.User.COLUMN_MOT_DE_PASSE
 import com.example.examenandroid.model.QcmContract.User.COLUMN_NOM
 import com.example.examenandroid.model.QcmContract.User.TABLE_NAME_USER
 
-class DataManager {
+object DataManager {
 
     //FONCTIONS POUR CHAPITRES
     //recuperer les chapitres
@@ -76,7 +76,12 @@ class DataManager {
 
     //fonction pour authentication
 
-    fun authentication( nom :String ,motDePasse : String ) : Boolean {
+    fun authentication( nom :String ,motDePasse : String ,users : ArrayList<User>) : Boolean {
+        for(item in users) {
+            if(nom == item.nom && motDePasse == item.motDePasse){
+                return true;
+            }
+        }
         return false;
     }
 }
