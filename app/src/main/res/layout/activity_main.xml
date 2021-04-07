@@ -40,7 +40,6 @@
             android:ems="10"
             android:hint="Username"
             android:padding="10dp"
-
             android:textColorHint="@color/white"
             android:textSize="22sp" />
 
@@ -54,13 +53,14 @@
             android:ems="10"
             android:hint="Password"
             android:padding="10dp"
+
             android:textColorHint="@color/white"
             android:textSize="21sp" />
         <Button
             android:id="@+id/signIn"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Signin"
+            android:text="Sign in"
             android:layout_marginTop="20dp"
             android:background="@drawable/button_background"
             android:textSize="18dp"
