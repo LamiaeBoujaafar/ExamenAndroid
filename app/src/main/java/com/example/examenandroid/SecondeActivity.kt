@@ -3,6 +3,7 @@ package com.example.examenandroid
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.examenandroid.adapter.ChapitreAdapter
 import com.example.examenandroid.databinding.ActivitySecondeBinding
 import com.example.examenandroid.model.Chapitre
@@ -22,8 +23,16 @@ class SecondeActivity : AppCompatActivity(), ChapitreAdapter.ItemClicked {
         setContentView(view)
 
         val myDBHelper = QcmDBHelper(this)
-        val chapitres : ArrayList<Chapitre> = DataManager.recupererChapitre(myDBHelper)
+        //val chapitres : ArrayList<Chapitre> = DataManager.recupererChapitre(myDBHelper)
+        val chapitres : ArrayList<Chapitre> = ArrayList<Chapitre>()
+        chapitres.add(Chapitre(1, "chapitre 1"))
+        chapitres.add(Chapitre(2, "chapitre 2"))
+        chapitres.add(Chapitre(3, "chapitre 3"))
+        chapitres.add(Chapitre(4, "chapitre 4"))
+        chapitres.add(Chapitre(5, "chapitre 5"))
         val recyclerViewChapitre = binding.recyclerViewChapitre
+
+        recyclerViewChapitre.layoutManager = LinearLayoutManager(this)
         recyclerViewChapitre.adapter = ChapitreAdapter(this, chapitres)
 
     }
