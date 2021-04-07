@@ -11,7 +11,7 @@ object QcmContract {
         const val  COLUMN_TITRE = "titre"
 
         const val CREATE_TABLE_CHAPITRE = "CREATE TABLE $TABLE_NAME_CHAPITRE(" +
-                                        "${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                        "${BaseColumns._ID} INTEGER PRIMARY KEY " +
                                         "$COLUMN_TITRE TEXT)"
 
         const val DROP_TABLE_CHAPITRE = "DROP TABLE IF EXISTS $TABLE_NAME_CHAPITRE"

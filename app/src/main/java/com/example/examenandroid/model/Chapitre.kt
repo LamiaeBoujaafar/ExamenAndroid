@@ -3,7 +3,7 @@ package com.example.examenandroid.model
 import android.os.Parcel
 import android.os.Parcelable
 
-class Chapitre(var id:Int, var nom: String?) :Parcelable{
+class Chapitre(var id:Int, var titre: String?) :Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()
@@ -12,7 +12,7 @@ class Chapitre(var id:Int, var nom: String?) :Parcelable{
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
-        parcel.writeString(nom)
+        parcel.writeString(titre)
     }
 
     override fun describeContents(): Int {
