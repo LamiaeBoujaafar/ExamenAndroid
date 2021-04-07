@@ -17,7 +17,7 @@ class ChapitreAdapter(context: SecondeActivity, private val chapitres: ArrayList
     }
 
     inner class ViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
-        val idChapitre:TextView = itemView.findViewById(R.id.idChapitreText)
+        val idChapitre:TextView = itemView.findViewById(R.id.nombreChapitreText)
         val titreChapitre:TextView = itemView.findViewById(R.id.titreChapitreText)
 
         init {

@@ -73,12 +73,24 @@ object DataManager {
             return users
         }
     }
+    //ajouter users
 
+    fun ajouterUser(myUserDBHelper: QcmDBHelper, user: User) {
+        val db = myUserDBHelper.writableDatabase
+        val values = ContentValues()
+        with( values ) {
+            put(COLUMN_ID,user.id)
+            put(COLUMN_NOM, user.nom )
+            put(COLUMN_MOT_DE_PASSE, user.motDePasse)
+            put(COLUMN_EMAIL, user.email)
+        }
+        val  newRowId = db?.insert(TABLE_NAME_USER, null, values)
+    }
     //fonction pour authentication
 
-    fun authentication( nom :String ,motDePasse : String ,users : ArrayList<User>) : Boolean {
+    fun authentication( email :String ,motDePasse : String ,users : ArrayList<User>) : Boolean {
         for(item in users) {
-            if(nom == item.nom && motDePasse == item.motDePasse){
+            if(email == item.email && motDePasse == item.motDePasse){
                 return true;
             }
         }
