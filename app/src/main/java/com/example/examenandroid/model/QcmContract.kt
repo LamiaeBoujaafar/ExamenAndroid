@@ -11,7 +11,7 @@ object QcmContract {
         const val  COLUMN_TITRE = "titre"
 
         const val CREATE_TABLE_CHAPITRE = "CREATE TABLE $TABLE_NAME_CHAPITRE(" +
-                                        "${BaseColumns._ID} INTEGER PRIMARY KEY " +
+                                        "${BaseColumns._ID} INTEGER PRIMARY KEY, " +
                                         "$COLUMN_TITRE TEXT)"
 
         const val DROP_TABLE_CHAPITRE = "DROP TABLE IF EXISTS $TABLE_NAME_CHAPITRE"
@@ -31,6 +31,7 @@ object QcmContract {
                 "${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "$COLUMN_REPONSE TEXT," +
                 "$COLUMN_EST_CORRECTE BOOLEAN," +
+                "$COLUMN_ID_QUESTION INTEGER," +
                 " FOREIGN KEY ("+ COLUMN_ID_QUESTION+") REFERENCES " + Question.TABLE_NAME_QUESTION+ "(" + Question.COLUMN_ID + ") )"
 
         const val DROP_TABLE_REPONSE = "DROP TABLE IF EXISTS $TABLE_NAME_REPONSE"
@@ -46,7 +47,8 @@ object QcmContract {
 
         const val CREATE_TABLE_QUESTION= "CREATE TABLE $TABLE_NAME_QUESTION(" +
                 "${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "$COLUMN_QUESTION TEXT" +
+                "$COLUMN_QUESTION TEXT," +
+                "$COLUMN_ID_CHAPITRE INTEGER," +
                 " FOREIGN KEY ("+ COLUMN_ID_CHAPITRE+") REFERENCES " + Chapitre.TABLE_NAME_CHAPITRE+ "(" + Chapitre.COLUMN_ID + ") )"
 
         const val DROP_TABLE_QUESTION = "DROP TABLE IF EXISTS $TABLE_NAME_QUESTION"
@@ -63,9 +65,9 @@ object QcmContract {
 
         const val CREATE_TABLE_USER= "CREATE TABLE $TABLE_NAME_USER(" +
                 "${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "$COLUMN_NOM TEXT" +
-                "$COLUMN_MOT_DE_PASSE TEXT" +
-                "$COLUMN_EMAIL TEXT"
+                "$COLUMN_NOM TEXT," +
+                "$COLUMN_MOT_DE_PASSE TEXT," +
+                "$COLUMN_EMAIL TEXT )"
 
         const val DROP_TABLE_USER = "DROP TABLE IF EXISTS $TABLE_NAME_USER"
 
