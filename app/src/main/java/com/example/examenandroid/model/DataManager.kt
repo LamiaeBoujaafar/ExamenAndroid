@@ -10,7 +10,9 @@ import com.example.examenandroid.model.QcmContract.User.COLUMN_NOM
 import com.example.examenandroid.model.QcmContract.User.TABLE_NAME_USER
 import com.example.examenandroid.model.QcmContract.Question
 import com.example.examenandroid.model.QcmContract.Question.COLUMN_ID_CHAPITRE
+import com.example.examenandroid.model.QcmContract.Question.COLUMN_QUESTION
 import com.example.examenandroid.model.QcmContract.Reponse
+import com.example.examenandroid.model.QcmContract.Reponse.COLUMN_EST_CORRECTE
 import com.example.examenandroid.model.QcmContract.Reponse.COLUMN_ID_QUESTION
 import com.example.examenandroid.model.QcmContract.Reponse.COLUMN_REPONSE
 import com.example.examenandroid.model.QcmContract.Reponse.TABLE_NAME_REPONSE
@@ -162,9 +164,9 @@ object DataManager {
             return questions
         }
     }
-    fun recupererReponseParIdQuestion(myUserDBHelper: QcmDBHelper,id_question: Int):ArrayList<String>{
+    fun recupererReponseParIdQuestion(myUserDBHelper: QcmDBHelper,id_question: Int):ArrayList<com.example.examenandroid.model.Reponse>{
         val db   = myUserDBHelper.readableDatabase
-        val reponses = java.util.ArrayList<String>()
+        val reponses = ArrayList<com.example.examenandroid.model.Reponse>()
         val selection = "$COLUMN_ID_QUESTION = ?"
         val selectionArgs = arrayOf(id_question.toString())
         val cursor = db.query(
@@ -178,12 +180,56 @@ object DataManager {
         )
         with(cursor) {
             while (moveToNext()) {
-                val reponse = getString( getColumnIndexOrThrow( COLUMN_REPONSE ) )
+                val id_reponse = getInt( getColumnIndexOrThrow( COLUMN_ID ) )
+                val reponse_nom = getString( getColumnIndexOrThrow( COLUMN_REPONSE ) )
+                val estCorrecte = getInt( getColumnIndexOrThrow( COLUMN_EST_CORRECTE ) ) > 0
+                val id_question = getInt( getColumnIndexOrThrow( COLUMN_ID_QUESTION ) )
+                val reponse = com.example.examenandroid.model.Reponse(id_reponse, reponse_nom,estCorrecte,id_question)
                 reponses.add(reponse)
             }
             return reponses
         }
     }
+    fun recupererQuestionReponse(myUserDBHelper: QcmDBHelper, id_chapitre :Int) : ArrayList<QuestionReponse>{
+        val questionReponse = ArrayList<QuestionReponse>()
+        val questions : ArrayList<com.example.examenandroid.model.Question> = recupererQuestionParChapitre(myUserDBHelper,id_chapitre)
+        for(question in questions){
+            val reponses : ArrayList<com.example.examenandroid.model.Reponse> = recupererReponseParIdQuestion(myUserDBHelper,question.id)
+            var reponseCorrect = ""
+            for (reponse in reponses){
+                if(reponse.estCorrecte == true){
+                    reponseCorrect = reponse.reponse.toString()
+                }
+            }
+            val result = QuestionReponse(question.id,question.question,reponses[0].reponse,reponses[1].reponse,reponses[2].reponse,reponseCorrect)
+            questionReponse.add(result)
+        }
+        return questionReponse
+    }
 
+    //fonction pour inserer des question
+    fun ajouterQuestion(myUserDBHelper: QcmDBHelper, question: com.example.examenandroid.model.Question) {
+        val db = myUserDBHelper.writableDatabase
+        val values = ContentValues()
+        with( values ) {
+            put(COLUMN_ID,question.id)
+            put(COLUMN_QUESTION, question.question)
+            put(COLUMN_ID_CHAPITRE, question.id_chapitre)
+        }
+        val  newRowId = db?.insert(TABLE_NAME_QUESTION, null, values)
+    }
+
+    //fonction pour inserer des reponses
+    fun ajouterReponses(myUserDBHelper: QcmDBHelper, reponse: com.example.examenandroid.model.Reponse) {
+        val db = myUserDBHelper.writableDatabase
+        val values = ContentValues()
+        with( values ) {
+            put(COLUMN_ID,reponse.id)
+            put(COLUMN_ID_QUESTION, reponse.id_question)
+            put(COLUMN_REPONSE, reponse.reponse)
+            put(COLUMN_EST_CORRECTE, reponse.estCorrecte)
+        }
+        val  newRowId = db?.insert(TABLE_NAME_REPONSE, null, values)
+    }
 
 }
