@@ -3,23 +3,23 @@ package com.example.examenandroid.model
 import android.os.Parcel
 import android.os.Parcelable
 
-class QuestionReponse(var id_question:Int, var question: String?, var id_chapitre:Int,var id_reponse:Int, var reponse: String?,var estCorrecte: Boolean?):Parcelable {
+class QuestionReponse( var id_question:Int,var question: String?,var choix1 : String?,var choix2 : String?,var choix3 : String?,var reponseCorrecte : String?):Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readString(),
-            parcel.readInt(),
-            parcel.readInt(),
             parcel.readString(),
-            parcel.readValue(Boolean::class.java.classLoader) as? Boolean) {
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id_question)
         parcel.writeString(question)
-        parcel.writeInt(id_chapitre)
-        parcel.writeInt(id_reponse)
-        parcel.writeString(reponse)
-        parcel.writeValue(estCorrecte)
+        parcel.writeString(choix1)
+        parcel.writeString(choix2)
+        parcel.writeString(choix3)
+        parcel.writeString(reponseCorrecte)
     }
 
     override fun describeContents(): Int {
@@ -35,4 +35,5 @@ class QuestionReponse(var id_question:Int, var question: String?, var id_chapitr
             return arrayOfNulls(size)
         }
     }
+
 }
