@@ -11,6 +11,9 @@ import com.example.examenandroid.model.QcmContract.User.TABLE_NAME_USER
 import com.example.examenandroid.model.QcmContract.Question
 import com.example.examenandroid.model.QcmContract.Question.COLUMN_ID_CHAPITRE
 import com.example.examenandroid.model.QcmContract.Reponse
+import com.example.examenandroid.model.QcmContract.Reponse.COLUMN_ID_QUESTION
+import com.example.examenandroid.model.QcmContract.Reponse.COLUMN_REPONSE
+import com.example.examenandroid.model.QcmContract.Reponse.TABLE_NAME_REPONSE
 
 
 object DataManager {
@@ -137,10 +140,10 @@ object DataManager {
     fun recupererQuestionParChapitre(myUserDBHelper: QcmDBHelper,id_chapitre: Int): ArrayList<com.example.examenandroid.model.Question>{
         val db   = myUserDBHelper.readableDatabase
         val questions = java.util.ArrayList<com.example.examenandroid.model.Question>()
-        val selection = "$COLUMN_ID_CHAPITRE Like ?"
+        val selection = "$COLUMN_ID_CHAPITRE = ?"
         val selectionArgs = arrayOf(id_chapitre.toString())
         val cursor = db.query(
-                TABLE_NAME_USER,
+                TABLE_NAME_QUESTION,
                 null,
                 selection,
                 selectionArgs,
@@ -157,6 +160,28 @@ object DataManager {
                 questions.add(question)
             }
             return questions
+        }
+    }
+    fun recupererReponseParIdQuestion(myUserDBHelper: QcmDBHelper,id_question: Int):ArrayList<String>{
+        val db   = myUserDBHelper.readableDatabase
+        val reponses = java.util.ArrayList<String>()
+        val selection = "$COLUMN_ID_QUESTION = ?"
+        val selectionArgs = arrayOf(id_question.toString())
+        val cursor = db.query(
+                TABLE_NAME_REPONSE,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null,
+        )
+        with(cursor) {
+            while (moveToNext()) {
+                val reponse = getString( getColumnIndexOrThrow( COLUMN_REPONSE ) )
+                reponses.add(reponse)
+            }
+            return reponses
         }
     }
 
