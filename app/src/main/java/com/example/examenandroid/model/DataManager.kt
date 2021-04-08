@@ -3,10 +3,13 @@ import android.content.ContentValues
 import com.example.examenandroid.model.QcmContract.Chapitre.COLUMN_ID
 import com.example.examenandroid.model.QcmContract.Chapitre.COLUMN_TITRE
 import com.example.examenandroid.model.QcmContract.Chapitre.TABLE_NAME_CHAPITRE
+import com.example.examenandroid.model.QcmContract.Question.TABLE_NAME_QUESTION
 import com.example.examenandroid.model.QcmContract.User.COLUMN_EMAIL
 import com.example.examenandroid.model.QcmContract.User.COLUMN_MOT_DE_PASSE
 import com.example.examenandroid.model.QcmContract.User.COLUMN_NOM
 import com.example.examenandroid.model.QcmContract.User.TABLE_NAME_USER
+import com.example.examenandroid.model.QcmContract.Question
+import com.example.examenandroid.model.QcmContract.Reponse
 
 object DataManager {
 
@@ -96,4 +99,36 @@ object DataManager {
         }
         return false;
     }
+    //FONCTIONS POUR Question et les reponses
+    //fonction qui recupere les questions avec leurs reponses
+
+    fun recupererQestionReponse(myUserDBHelper: QcmDBHelper, id_chapitre :Int) : ArrayList<QuestionReponse> {
+        val db   = myUserDBHelper.readableDatabase
+        val question_reponses = java.util.ArrayList<QuestionReponse>()
+        val query = "SELECT" + Question.COLUMN_ID + " , " + Question.COLUMN_QUESTION + " , " + Question.COLUMN_ID_CHAPITRE +
+                " , " + Reponse.COLUMN_ID + " , " + Reponse.COLUMN_REPONSE + " , " + Reponse.COLUMN_EST_CORRECTE +
+                " FROM " + TABLE_NAME_QUESTION +
+                " JOIN " + Reponse.TABLE_NAME_REPONSE + " ON " +  Question.COLUMN_ID + " = " + Reponse.COLUMN_ID +
+                " WHERE " + Question.COLUMN_ID_CHAPITRE + " = ?"
+
+        val cursor = db.rawQuery(
+                query,
+                arrayOf(id_chapitre.toString())
+        )
+        with(cursor) {
+            while (moveToNext()) {
+                val question_id = getInt( getColumnIndexOrThrow( Question.COLUMN_ID  ) )
+                val question = getString( getColumnIndexOrThrow( Question.COLUMN_QUESTION ) )
+                val id_chapitre = getInt( getColumnIndexOrThrow( Question.COLUMN_ID_CHAPITRE ) )
+                val reponse_id = getInt( getColumnIndexOrThrow( Reponse.COLUMN_ID ) )
+                val reponse = getString( getColumnIndexOrThrow( Reponse.COLUMN_REPONSE ) )
+                val est_correcte = getInt( getColumnIndexOrThrow( Reponse.COLUMN_EST_CORRECTE ) ) > 0
+                val question_reponse = QuestionReponse(question_id, question,id_chapitre,reponse_id,reponse,est_correcte)
+                question_reponses.add(question_reponse)
+            }
+            return question_reponses
+        }
+    }
+
+
 }
