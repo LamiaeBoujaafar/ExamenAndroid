@@ -25,32 +25,25 @@ class MainActivity : AppCompatActivity() {
         val loginBtn = binding.loginBtn
         val emailInput = binding.emailInput
         val mdpInput = binding.mdpInput
-        //POUR AJOUTER USERS DANS BASE DE DONNEES
-//        val myQcmHelper = QcmDBHelper(this)
-//        DataManager.ajouterUser(myQcmHelper,User(1,"lamiae","lamiae","lamiae20ber@gmail.com"))
-//        DataManager.ajouterUser(myQcmHelper,User(2,"sakhr","sakhr","sakhr@gmail.com"))
-
         val users = DataManager.recupererUsers(myDBHelper)
+        val qcmDBHelper = QcmDBHelper(this)
         loginBtn.setOnClickListener {
-            val email = emailInput.text.toString()
-            val mdp = mdpInput.text.toString()
+            FillDB.FillChapitre(qcmDBHelper)
+            FillDB.FillUser(qcmDBHelper)
+            FillDB.FillQuestion(qcmDBHelper)
+            FillDB.FillReponse(qcmDBHelper)
+//            val email = emailInput.text.toString()
+//            val mdp = mdpInput.text.toString()
+//
+//            if(DataManager.authentication("lamiae20ber@gmail.com","lamiae",users)){
+//                val myIntent = Intent(this, SecondeActivity::class.java)
+//                startActivity(myIntent)
+//                emailInput.text.clear()
+//                mdpInput.text.clear()
+//            }else{
+//                Toast.makeText(this, "mot de passe ou email incorrecte(s)", Toast.LENGTH_SHORT).show()
+//            }
 
-            if(DataManager.authentication("lamiae20ber@gmail.com","lamiae",users)){
-                val myIntent = Intent(this, SecondeActivity::class.java)
-                startActivity(myIntent)
-                emailInput.text.clear()
-                mdpInput.text.clear()
-            }else{
-                Toast.makeText(this, "mot de passe ou email incorrecte(s)", Toast.LENGTH_SHORT).show()
-            }
-//            val myQcmDBHelper = QcmDBHelper(this)
-//            DataManager.ajouterChapitre(myQcmDBHelper, Chapitre(1,"Introduction au développement Android avec Android Studio"))
-//            DataManager.ajouterChapitre(myQcmDBHelper, Chapitre(2,"Introduction au langage Kotlin"))
-//            DataManager.ajouterChapitre(myQcmDBHelper, Chapitre(3,"Cycle de vie d'une activité"))
-//            DataManager.ajouterChapitre(myQcmDBHelper, Chapitre(4,"Les fragments"))
-//            DataManager.ajouterChapitre(myQcmDBHelper, Chapitre(5,"Stockage et SQLite"))
-//            val myIntent = Intent(this, SecondeActivity::class.java)
-//            startActivity(myIntent)
         }
 
     }
