@@ -22,6 +22,7 @@ import com.example.examenandroid.model.DataManager
 import com.example.examenandroid.model.QcmDBHelper
 import com.example.examenandroid.model.QuestionReponse
 import android.widget.Toast
+import java.util.*
 
 
 class QcmQuestionFragment : Fragment() {
@@ -72,7 +73,7 @@ class QcmQuestionFragment : Fragment() {
 //        arrayQuestionReponse.add(questionReponse3)
 
         recyclerViewChapitre = myView?.findViewById(R.id.questionRecyclerView)
-
+        Collections.shuffle(arrayQuestionReponse)
         layoutManager = LinearLayoutManager(this.activity)
         recyclerViewChapitre?.layoutManager = layoutManager
         myAdapter = QuestionAdapter(this.activity as FragmentActivity?, arrayQuestionReponse)

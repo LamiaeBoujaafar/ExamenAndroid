@@ -1,5 +1,6 @@
 package com.example.examenandroid.model
 import android.content.ContentValues
+import com.example.examenandroid.fragment.QuestionReponseTest
 import com.example.examenandroid.model.QcmContract.Chapitre.COLUMN_ID
 import com.example.examenandroid.model.QcmContract.Chapitre.COLUMN_TITRE
 import com.example.examenandroid.model.QcmContract.Chapitre.TABLE_NAME_CHAPITRE
@@ -11,7 +12,6 @@ import com.example.examenandroid.model.QcmContract.User.TABLE_NAME_USER
 import com.example.examenandroid.model.QcmContract.Question
 import com.example.examenandroid.model.QcmContract.Question.COLUMN_ID_CHAPITRE
 import com.example.examenandroid.model.QcmContract.Question.COLUMN_QUESTION
-import com.example.examenandroid.model.QcmContract.Reponse
 import com.example.examenandroid.model.QcmContract.Reponse.COLUMN_EST_CORRECTE
 import com.example.examenandroid.model.QcmContract.Reponse.COLUMN_ID_QUESTION
 import com.example.examenandroid.model.QcmContract.Reponse.COLUMN_REPONSE
@@ -190,8 +190,25 @@ object DataManager {
             return reponses
         }
     }
-    fun recupererQuestionReponse(myUserDBHelper: QcmDBHelper, id_chapitre :Int) : ArrayList<QuestionReponse>{
-        val questionReponse = ArrayList<QuestionReponse>()
+//    fun recupererQuestionReponse(myUserDBHelper: QcmDBHelper, id_chapitre :Int) : ArrayList<QuestionReponse>{
+//        val questionReponse = ArrayList<QuestionReponse>()
+//        val questions : ArrayList<com.example.examenandroid.model.Question> = recupererQuestionParChapitre(myUserDBHelper,id_chapitre)
+//        for(question in questions){
+//            val reponses : ArrayList<com.example.examenandroid.model.Reponse> = recupererReponseParIdQuestion(myUserDBHelper,question.id)
+//            var reponseCorrect = ""
+//            for (reponse in reponses){
+//                if(reponse.estCorrecte == true){
+//                    reponseCorrect = reponse.reponse.toString()
+//                }
+//            }
+//            val result = QuestionReponse(question.id,question.question,reponses[0].reponse,reponses[1].reponse,reponses[2].reponse,reponseCorrect)
+//            questionReponse.add(result)
+//        }
+//        return questionReponse
+//    }
+
+    fun recupererQuestionReponse(myUserDBHelper: QcmDBHelper, id_chapitre :Int) : ArrayList<QuestionReponseTest>{
+        val questionReponseTest = ArrayList<QuestionReponseTest>()
         val questions : ArrayList<com.example.examenandroid.model.Question> = recupererQuestionParChapitre(myUserDBHelper,id_chapitre)
         for(question in questions){
             val reponses : ArrayList<com.example.examenandroid.model.Reponse> = recupererReponseParIdQuestion(myUserDBHelper,question.id)
@@ -201,10 +218,11 @@ object DataManager {
                     reponseCorrect = reponse.reponse.toString()
                 }
             }
-            val result = QuestionReponse(question.id,question.question,reponses[0].reponse,reponses[1].reponse,reponses[2].reponse,reponseCorrect)
-            questionReponse.add(result)
+            val choixArray = arrayOf(reponses[0].reponse, reponses[1].reponse, reponses[2].reponse)
+            val result = QuestionReponseTest(question.id,question.question, choixArray,reponseCorrect)
+            questionReponseTest.add(result)
         }
-        return questionReponse
+        return questionReponseTest
     }
 
     //fonction pour inserer des question

@@ -1,6 +1,7 @@
 package com.example.examenandroid.adapter
 
 import android.app.Activity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +12,17 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.examenandroid.R
 import com.example.examenandroid.SecondeActivity
+import com.example.examenandroid.fragment.QuestionReponseTest
 import com.example.examenandroid.model.QuestionReponse
+import java.util.*
+import kotlin.collections.ArrayList
 
-class QuestionAdapter(context: FragmentActivity?, private val qcmArray: ArrayList<QuestionReponse>) : RecyclerView.Adapter<QuestionAdapter.ViewHolder>() {
+class QuestionAdapter(context: FragmentActivity?, private val qcmArray: ArrayList<QuestionReponseTest>) : RecyclerView.Adapter<QuestionAdapter.ViewHolder>() {
 
     init {
 
     }
+    var count = 1
 
     inner class ViewHolder(itemView: View) :  RecyclerView.ViewHolder(itemView){
         val questionText:TextView = itemView.findViewById(R.id.textQuestion)
@@ -33,12 +38,17 @@ class QuestionAdapter(context: FragmentActivity?, private val qcmArray: ArrayLis
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.questionText.text = qcmArray[position].question
+        viewHolder.questionText.text = "$count- " + qcmArray[position].question
         viewHolder.radioGroup.id +=  qcmArray[position].id_question
+        count += 1
 
-        viewHolder.radioButtonChoix1.text = qcmArray[position].choix1
-        viewHolder.radioButtonChoix2.text = qcmArray[position].choix2
-        viewHolder.radioButtonChoix3.text = qcmArray[position].choix3
+        val choix:ArrayList<String> = ArrayList<String>(qcmArray[position].choix.asList())
+        Log.i("listi", choix.toList().toString())
+        Collections.shuffle(choix)
+
+        viewHolder.radioButtonChoix1.text = choix[0]
+        viewHolder.radioButtonChoix2.text = choix[1]
+        viewHolder.radioButtonChoix3.text = choix[2]
 
         viewHolder.radioButtonChoix1.id += qcmArray[position].id_question
         viewHolder.radioButtonChoix2.id += qcmArray[position].id_question
