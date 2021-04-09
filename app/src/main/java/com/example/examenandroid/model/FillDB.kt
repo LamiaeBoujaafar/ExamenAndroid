@@ -25,7 +25,7 @@ class FillDB (){
             //REPONSE DE QUESTION 2
             DataManager.ajouterReponses(myQcmHelper,Reponse(4,"Juin 2007",true,2))
             DataManager.ajouterReponses(myQcmHelper,Reponse(5,"Juin 2010",false,2))
-            DataManager.ajouterReponses(myQcmHelper,Reponse(6,"Juin 20012",false,2))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(6,"Juin 2012",false,2))
             //REPONSE DE QUESTION 3
             DataManager.ajouterReponses(myQcmHelper,Reponse(7,"non",false,3))
             DataManager.ajouterReponses(myQcmHelper,Reponse(8,"oui",true,3))
@@ -58,6 +58,49 @@ class FillDB (){
             DataManager.ajouterReponses(myQcmHelper,Reponse(28,"JRE",false,10))
             DataManager.ajouterReponses(myQcmHelper,Reponse(29,"JDK",false,10))
             DataManager.ajouterReponses(myQcmHelper,Reponse(30,"JVM",true,10))
+
+
+            //CHAPITRE 2
+            //REPONSE DE QUESTION 1
+            DataManager.ajouterReponses(myQcmHelper,Reponse(31,"Oui",true,11))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(32,"Non",false,11))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(33,"Je ne sais pas",false,11))
+            //REPONSE DE QUESTION 2
+            DataManager.ajouterReponses(myQcmHelper,Reponse(34,"Private val timeout :Int = 10",true,12))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(35,"Private var timeout :Int = 10",false,12))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(36,"Private val timeout :Int ? = 10",false,12))
+            //REPONSE DE QUESTION 3
+            DataManager.ajouterReponses(myQcmHelper,Reponse(37,"Private lateinit val currentToken :String ? = null",false,13))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(38,"Private lateinit var currentToken :String ? = null",true,13))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(39,"Private lateinit var currentToken :String",false, 13))
+            //REPONSE DE QUESTION 4
+            DataManager.ajouterReponses(myQcmHelper,Reponse(40,"Fun transformToUppercase(username : String):String{return username.toUpperCase()}",false,14))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(41,"Fun transformToUppercase(username : String):String = username.toUpperCase()",false,14))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(42,"Fun transformToUppercase(username : String) =  username.toUpperCase()",true,14))
+            //REPONSE DE QUESTION 5
+            DataManager.ajouterReponses(myQcmHelper,Reponse(43,"Oui, cela est obligatoire, sinon le compilateur lèvera une erreur.",false,15))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(44,"Non, cela n'est pas obligatoire.",true,15))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(45,"Je ne sais pas",false,15))
+            //REPONSE DE QUESTION 6
+            DataManager.ajouterReponses(myQcmHelper,Reponse(46,"0123",false,16))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(47,"123",false,16))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(48,"L'instruction affichera  0  à l'infini et finira par faire planter le programme.",true,16))
+            //REPONSE DE QUESTION 7
+            DataManager.ajouterReponses(myQcmHelper,Reponse(49,"1 – 6 – 11  - 16 – 21 – 26 – 31 – 36 – 41 – 46  ",true,17))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(50,"5 – 10 – 15 – 20 – 25 – 30 – 35 – 35 – 40 – 45 – 50",false,17))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(51,"0 – 10 – 20 – 30 – 40  - 50",false,17))
+            //REPONSE DE QUESTION 8
+            DataManager.ajouterReponses(myQcmHelper,Reponse(52,"Aucune. Les deux types sont utilisés pour des soucis de compatibilités avec la JVM.. ",false,18))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(53,"Le type  List  permet de définir une liste d’éléments ordonnée et immuable alors que le type  MutableList  permet de définir une liste d’éléments ordonnée et muable ",true,18))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(54,"Je ne sais pas",false,18))
+            //REPONSE DE QUESTION 9
+            DataManager.ajouterReponses(myQcmHelper,Reponse(55,"value my_var: Char",true,19))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(56,"Value varchar",false,19))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(57,"var varchar",false,19))
+            //REPONSE DE QUESTION 10
+            DataManager.ajouterReponses(myQcmHelper,Reponse(58,"Je ne sais pas",false,20))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(59,"Oui",false,20))
+            DataManager.ajouterReponses(myQcmHelper,Reponse(60,"Non",true,20))
         }
         fun FillQuestion(myQcmHelper : QcmDBHelper){
             //AJOUTER QUESTIONS POUR CHAPITRE 1
