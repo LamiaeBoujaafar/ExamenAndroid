@@ -1,11 +1,16 @@
 package com.example.examenandroid.fragment
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.os.Build
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +21,7 @@ import com.example.examenandroid.model.Chapitre
 import com.example.examenandroid.model.DataManager
 import com.example.examenandroid.model.QcmDBHelper
 import com.example.examenandroid.model.QuestionReponse
+import android.widget.Toast
 
 
 class QcmQuestionFragment : Fragment() {
@@ -42,6 +48,7 @@ class QcmQuestionFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -70,11 +77,25 @@ class QcmQuestionFragment : Fragment() {
         recyclerViewChapitre?.layoutManager = layoutManager
         myAdapter = QuestionAdapter(this.activity as FragmentActivity?, arrayQuestionReponse)
         recyclerViewChapitre?.adapter = myAdapter
-
 //        if(args != null){
 //            Log.i("qcm", args.getParcelable<Chapitre>("chapitre")?.id.toString())
 //        }
+        var validetBtn = myView?.findViewById<Button>(R.id.validetBtn)
+            validetBtn?.setOnClickListener {
+                val builder = AlertDialog.Builder(this.activity)
+                builder.setTitle("Validez-vous vos réponses")
+                builder.setMessage("Voulez-vous vraiment valider vos réponses ?")
 
+                builder.setNegativeButton(android.R.string.no) { dialog, which ->
+                    Toast.makeText(this.context,
+                        android.R.string.no, Toast.LENGTH_SHORT).show()
+                }
+                builder.setNeutralButton("Résultat") { dialog, which ->
+                    Toast.makeText(this.context,
+                        "Résultat", Toast.LENGTH_SHORT).show()
+                }
+                builder.show()
+            }
     }
 
     interface ShowFrag{
