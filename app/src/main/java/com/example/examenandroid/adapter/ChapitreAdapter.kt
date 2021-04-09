@@ -4,14 +4,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.examenandroid.R
-import com.example.examenandroid.SecondeActivity
 import com.example.examenandroid.model.Chapitre
 
-class ChapitreAdapter(context: SecondeActivity, private val chapitres: ArrayList<Chapitre>) : RecyclerView.Adapter<ChapitreAdapter.ViewHolder>() {
+class ChapitreAdapter(context: FragmentActivity?, private val chapitres: ArrayList<Chapitre>) : RecyclerView.Adapter<ChapitreAdapter.ViewHolder>() {
 
-    var myActivity: ItemClicked = context
+    var myActivity: ItemClicked
+
+    init {
+        myActivity = context as ItemClicked
+    }
+
     interface ItemClicked {
         fun onItemClicked(chapitre: Chapitre)
     }

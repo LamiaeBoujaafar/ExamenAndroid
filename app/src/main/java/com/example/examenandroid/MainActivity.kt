@@ -28,21 +28,21 @@ class MainActivity : AppCompatActivity() {
         val users = DataManager.recupererUsers(myDBHelper)
         val qcmDBHelper = QcmDBHelper(this)
         loginBtn.setOnClickListener {
-            FillDB.FillChapitre(qcmDBHelper)
-            FillDB.FillUser(qcmDBHelper)
-            FillDB.FillQuestion(qcmDBHelper)
-            FillDB.FillReponse(qcmDBHelper)
-//            val email = emailInput.text.toString()
-//            val mdp = mdpInput.text.toString()
-//
-//            if(DataManager.authentication("lamiae20ber@gmail.com","lamiae",users)){
-//                val myIntent = Intent(this, SecondeActivity::class.java)
-//                startActivity(myIntent)
-//                emailInput.text.clear()
-//                mdpInput.text.clear()
-//            }else{
-//                Toast.makeText(this, "mot de passe ou email incorrecte(s)", Toast.LENGTH_SHORT).show()
-//            }
+//            FillDB.FillChapitre(qcmDBHelper)
+//            FillDB.FillUser(qcmDBHelper)
+//            FillDB.FillQuestion(qcmDBHelper)
+//            FillDB.FillReponse(qcmDBHelper)
+            val email = emailInput.text.toString()
+            val mdp = mdpInput.text.toString()
+
+            if(DataManager.authentication("lamiae20ber@gmail.com","lamiae",users)){
+                val myIntent = Intent(this, SecondeActivity::class.java)
+                startActivity(myIntent)
+                emailInput.text.clear()
+                mdpInput.text.clear()
+            }else{
+                Toast.makeText(this, "mot de passe ou email incorrecte(s)", Toast.LENGTH_SHORT).show()
+            }
 
         }
 
