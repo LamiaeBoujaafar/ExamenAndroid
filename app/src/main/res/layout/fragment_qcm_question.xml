@@ -43,5 +43,16 @@
                 android:text="Valider les reponses"
                 android:backgroundTint="#904e95"/>
 
+        <Button
+            android:id="@+id/resetBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shapelogin"
+            android:text="reset"
+            android:backgroundTint="#904e95"/>
+
     </LinearLayout>
 </ScrollView>
