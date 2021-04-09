@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
             android:text="En trois temps "
-            android:textColor="#e96443"
+            android:textColor="@color/purple_700"
             android:textStyle="bold"
             android:textSize="18sp" />
         <RadioGroup
@@ -38,29 +38,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:buttonTint="@color/black"
+                android:buttonTint="@color/purple_700"
                 android:text="RadioButton"
                 android:textSize="17dp"
-                android:textColor="#1b1717" />
+                android:textColor="@color/purple_700" />
             <RadioButton
                 android:id="@+id/radioButtonChoix2Qst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/black"
+                android:buttonTint="@color/purple_700"
                 android:layout_margin="5dp"
                 android:textSize="17dp"
                 android:fontFamily="sans-serif-condensed-light"
                 android:text="RadioButton"
-                android:textColor="#1b1717" />
+                android:textColor="@color/purple_700" />
             <RadioButton
                 android:id="@+id/radioButtonChoix3Qst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/black"
+                android:buttonTint="@color/purple_700"
                 android:layout_margin="5dp"
                 android:textSize="15dp"
                 android:text="RadioButton"
-                android:textColor="#1b1717" />
+                android:textColor= "@color/purple_700" />
         </RadioGroup>
     </LinearLayout>
 

@@ -9,7 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,11 +21,11 @@ import com.example.examenandroid.model.Chapitre
 import com.example.examenandroid.model.DataManager
 import com.example.examenandroid.model.QcmDBHelper
 import com.example.examenandroid.model.QuestionReponse
-import android.widget.Toast
 import java.util.*
+import kotlin.collections.HashMap
 
 
-class QcmQuestionFragment : Fragment() {
+class QcmQuestionFragment : Fragment(), QuestionAdapter.IAfficheScore {
 
     var myView : View? = null
     var myAdapter: RecyclerView.Adapter<QuestionAdapter.ViewHolder>? = null
@@ -72,11 +72,24 @@ class QcmQuestionFragment : Fragment() {
 //        arrayQuestionReponse.add(questionReponse2)
 //        arrayQuestionReponse.add(questionReponse3)
 
+        var afficherResultat = false
+        val reponses = HashMap<Int, String>()
+//        reponses.put(0, "Un service d'exploitation mobile")
+//        reponses.put(1, "Juin 2007")
+//        reponses.put(2, "oui")
+//        reponses.put(3, "Un seul écran d’interface utilisateur qui apparait dans votre application")
+//        reponses.put(4, "Activity")
+//        reponses.put(5, "Aucune des réponses ci-dessus")
+//        reponses.put(6, "Décrit en xml l'interface graphique de l'application Android ")
+//        reponses.put(7, "Button bt = (Button) findViewbyId(R.main.mon_bouton);")
+//        reponses.put(8, "JVM")
+//        reponses.put(9, "JDK")
+
         recyclerViewChapitre = myView?.findViewById(R.id.questionRecyclerView)
         Collections.shuffle(arrayQuestionReponse)
         layoutManager = LinearLayoutManager(this.activity)
         recyclerViewChapitre?.layoutManager = layoutManager
-        myAdapter = QuestionAdapter(this.activity as FragmentActivity?, arrayQuestionReponse)
+        myAdapter = QuestionAdapter(this.activity as FragmentActivity?, arrayQuestionReponse, reponses, afficherResultat, this)
         recyclerViewChapitre?.adapter = myAdapter
 //        if(args != null){
 //            Log.i("qcm", args.getParcelable<Chapitre>("chapitre")?.id.toString())
@@ -94,6 +107,10 @@ class QcmQuestionFragment : Fragment() {
                 builder.setNeutralButton("Résultat") { dialog, which ->
                     Toast.makeText(this.context,
                         "Résultat", Toast.LENGTH_SHORT).show()
+
+
+                    myAdapter = QuestionAdapter(this.activity, arrayQuestionReponse, reponses, true, this)
+                    recyclerViewChapitre?.adapter = myAdapter
                 }
                 builder.show()
             }
@@ -101,6 +118,13 @@ class QcmQuestionFragment : Fragment() {
 
     interface ShowFrag{
         fun afficherFrag()
+    }
+
+    override fun afficherScore(score: Int) {
+        val scoreText = myView?.findViewById<TextView>(R.id.scoreText)
+        scoreText?.text = "Votre Score est : $score"
+        val scollView = myView?.findViewById<ScrollView>(R.id.scrollView)
+        scollView?.scrollTo(0, 0);
     }
 
 }
