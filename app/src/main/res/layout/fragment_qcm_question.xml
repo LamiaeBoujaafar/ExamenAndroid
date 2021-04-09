@@ -1,31 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background"
     xmlns:tools="http://schemas.android.com/tools">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".fragment.QcmQuestionFragment"
         android:id="@+id/qcmQuestionFragment"
         android:gravity="center"
         android:orientation="vertical">
-
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:text="Start Quiz"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/questionRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black" />
 
-
-
+            />
             <Button
                 android:id="@+id/validetBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="170dp"
-                android:text="Valider" />
+                android:width="300dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/shapelogin"
+                android:text="Valider les reponses"
+                android:backgroundTint="#904e95"/>
 
     </LinearLayout>
 </ScrollView>

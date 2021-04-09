@@ -2,64 +2,65 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/white">
+    android:layout_width="match_parent"
+    android:layout_margin="7dp"
+    android:id="@+id/Card_View"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    app:cardElevation="3dp"
+    app:cardCornerRadius="20dp"
+    app:cardBackgroundColor="#f8ede3">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@color/white"
+        android:background="#f8ede3"
+        android:layout_margin="10dp"
         android:orientation="vertical">
-
-
         <TextView
             android:id="@+id/textQuestion"
             android:layout_width="match_parent"
-            android:layout_height="69dp"
+            android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
-            android:text="En trois temps : obtention du manager, création d’une transaction et attribution des fragments aux « réceptacles »"
-            android:textColor="#7F6FE3"
+            android:text="En trois temps "
+            android:textColor="#e96443"
+            android:textStyle="bold"
             android:textSize="18sp" />
-
         <RadioGroup
             android:id="@+id/radioGroupQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp">
-
+            android:layout_margin="5dp">
             <RadioButton
                 android:id="@+id/radioButtonChoix1Qst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:buttonTint="#7F6FE3"
-                android:fontFamily="sans-serif-condensed-light"
-                android:textColor="#7F6FE3" />
-
+                android:layout_margin="5dp"
+                android:buttonTint="@color/black"
+                android:text="RadioButton"
+                android:textSize="17dp"
+                android:textColor="#1b1717" />
             <RadioButton
                 android:id="@+id/radioButtonChoix2Qst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:buttonTint="#7F6FE3"
+                android:buttonTint="@color/black"
+                android:layout_margin="5dp"
+                android:textSize="17dp"
                 android:fontFamily="sans-serif-condensed-light"
                 android:text="RadioButton"
-                android:textColor="#7F6FE3" />
-
+                android:textColor="#1b1717" />
             <RadioButton
                 android:id="@+id/radioButtonChoix3Qst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:buttonTint="#7F6FE3"
-                android:fontFamily="sans-serif-condensed-light"
+                android:buttonTint="@color/black"
+                android:layout_margin="5dp"
+                android:textSize="15dp"
                 android:text="RadioButton"
-                android:textColor="#7F6FE3" />
-
+                android:textColor="#1b1717" />
         </RadioGroup>
     </LinearLayout>
 
