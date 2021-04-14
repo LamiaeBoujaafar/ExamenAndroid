@@ -128,7 +128,7 @@ class QuestionAdapter(context: FragmentActivity?, private val qcmArray: ArrayLis
                     viewHolder.radioButtonChoix2.text.toString() -> {
                         viewHolder.radioButtonChoix2.setTextColor(Color.RED)
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                            viewHolder.radioButtonChoix3.buttonTintList = ColorStateList.valueOf(Color.RED)
+                            viewHolder.radioButtonChoix2.buttonTintList = ColorStateList.valueOf(Color.RED)
                         }
                     }
                     viewHolder.radioButtonChoix3.text.toString() -> {
@@ -178,10 +178,6 @@ class QuestionAdapter(context: FragmentActivity?, private val qcmArray: ArrayLis
         }
 
         Log.i("test12", viewHolder.radioButtonChoix3.text.toString())
-
-//        viewHolder.radioButtonChoix1.id += qcmArray[position].id_question
-//        viewHolder.radioButtonChoix2.id += qcmArray[position].id_question
-//        viewHolder.radioButtonChoix3.id += qcmArray[position].id_question
 
     }
 
