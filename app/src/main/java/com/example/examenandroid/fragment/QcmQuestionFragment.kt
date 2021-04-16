@@ -2,26 +2,23 @@ package com.example.examenandroid.fragment
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import androidx.fragment.app.Fragment
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.examenandroid.R
-import com.example.examenandroid.SecondeActivity
 import com.example.examenandroid.adapter.QuestionAdapter
 import com.example.examenandroid.model.Chapitre
 import com.example.examenandroid.model.DataManager
 import com.example.examenandroid.model.QcmDBHelper
-import com.example.examenandroid.model.QuestionReponse
-import java.util.*
 import kotlin.collections.HashMap
 
 
@@ -31,10 +28,10 @@ class QcmQuestionFragment : Fragment(), QuestionAdapter.IAfficheScore {
     var myAdapter: RecyclerView.Adapter<QuestionAdapter.ViewHolder>? = null
     var recyclerViewChapitre : RecyclerView? = null
     var layoutManager : RecyclerView.LayoutManager? = null
+    lateinit var dialog : Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -43,88 +40,120 @@ class QcmQuestionFragment : Fragment(), QuestionAdapter.IAfficheScore {
         return myView
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-
-    }
-
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //val arrayQuestionReponse = ArrayList<QuestionReponse>()
+        //      pour recuperer le bundle qui contient le chapitre selectionner
         val args = arguments
 
         val qcmDBHelper = this.activity?.let { QcmDBHelper(it) }
         val id_chapitre = args?.getParcelable<Chapitre>("chapitre")?.id
+        //      recuperer les questions et leurs reponses selon l id du chapitre choisit
         val arrayQuestionReponse = DataManager.recupererQuestionReponse(qcmDBHelper!!, id_chapitre!!)
 
-
-
-//        val questionReponse1 = QuestionReponse(1, "question 1","choix 1", "choix 2", "choix 3", "choix 1")
-//        val questionReponse2 = QuestionReponse(2, "question 2","choix 1", "choix 2", "choix 3", "choix 2")
-//        val questionReponse3 = QuestionReponse(3, "question 3","choix 1", "choix 2", "choix 3", "choix 3")
-//        arrayQuestionReponse.add(questionReponse1)
-//        arrayQuestionReponse.add(questionReponse2)
-//        arrayQuestionReponse.add(questionReponse3)
-//        arrayQuestionReponse.add(questionReponse1)
-//        arrayQuestionReponse.add(questionReponse2)
-//        arrayQuestionReponse.add(questionReponse3)
-
+        //      si l'utlisateur valider ses reponses cette var devient true pour afficher son score ainsi que les reponses correctes
         var afficherResultat = false
+
+        //      map pour stocker les reponses choisi
         val reponses = HashMap<Int, String>()
-//        reponses.put(0, "Un service d'exploitation mobile")
-//        reponses.put(1, "Juin 2007")
-//        reponses.put(2, "oui")
-//        reponses.put(3, "Un seul écran d’interface utilisateur qui apparait dans votre application")
-//        reponses.put(4, "Activity")
-//        reponses.put(5, "Aucune des réponses ci-dessus")
-//        reponses.put(6, "Décrit en xml l'interface graphique de l'application Android ")
-//        reponses.put(7, "Button bt = (Button) findViewbyId(R.main.mon_bouton);")
-//        reponses.put(8, "JVM")
-//        reponses.put(9, "JDK")
+
+        //      fonction pour afficher les reponses aleatoirement
+        arrayQuestionReponse.shuffle()
 
         recyclerViewChapitre = myView?.findViewById(R.id.questionRecyclerView)
-        Collections.shuffle(arrayQuestionReponse)
         layoutManager = LinearLayoutManager(this.activity)
         recyclerViewChapitre?.layoutManager = layoutManager
-        myAdapter = QuestionAdapter(this.activity as FragmentActivity?, arrayQuestionReponse, reponses, afficherResultat, this)
+
+        //      arrayQuestionReponse : array qui contient les questions ainsi que le reponses du chapitre choisi depuis la BD
+        //      reponses: map pour stocker les reponses choisi
+        //      afficherResultat : boolean pour tester si l'utilisateur a valide ses reponses
+        myAdapter = QuestionAdapter(this.activity, arrayQuestionReponse, reponses, afficherResultat, this)
         recyclerViewChapitre?.adapter = myAdapter
-//        if(args != null){
-//            Log.i("qcm", args.getParcelable<Chapitre>("chapitre")?.id.toString())
-//        }
+
         var validetBtn = myView?.findViewById<Button>(R.id.validetBtn)
-            validetBtn?.setOnClickListener {
-                val builder = AlertDialog.Builder(this.activity)
-                builder.setTitle("Validez-vous vos réponses")
-                builder.setMessage("Voulez-vous vraiment valider vos réponses ?")
 
-                builder.setNegativeButton(android.R.string.no) { dialog, which ->
-                    Toast.makeText(this.context,
-                        android.R.string.no, Toast.LENGTH_SHORT).show()
-                }
-                builder.setNeutralButton("Résultat") { dialog, which ->
-                    Toast.makeText(this.context,
-                        "Résultat", Toast.LENGTH_SHORT).show()
+        validetBtn?.setOnClickListener {
 
+            // pour afficher une alert lors du click sur valider
+            val builder = AlertDialog.Builder(this.activity)
+            builder.setTitle("Validez-vous vos réponses")
+            builder.setMessage("Voulez-vous vraiment valider vos réponses ?")
 
-                    myAdapter = QuestionAdapter(this.activity, arrayQuestionReponse, reponses, true, this)
-                    recyclerViewChapitre?.adapter = myAdapter
-                }
-                builder.show()
+            //      button cancel pour annuler et reviser ses reponses
+            builder.setNegativeButton(android.R.string.no) { dialog, which ->
+                Toast.makeText(this.context,
+                    android.R.string.no, Toast.LENGTH_SHORT).show()
             }
-    }
+            //      button resultat pour valider les choix et afficher le score
+            builder.setNeutralButton("Résultat") { dialog, which ->
+                Toast.makeText(this.context,
+                    "Résultat", Toast.LENGTH_SHORT).show()
 
-    interface ShowFrag{
-        fun afficherFrag()
+
+                myAdapter = QuestionAdapter(this.activity, arrayQuestionReponse, reponses, true, this)
+                recyclerViewChapitre?.adapter = myAdapter
+            }
+            builder.show()
+
+            //openWinDialog()
+
+        }
     }
 
     override fun afficherScore(score: Int) {
-        val scoreText = myView?.findViewById<TextView>(R.id.scoreText)
-        scoreText?.text = "Votre Score est : $score"
-        val scollView = myView?.findViewById<ScrollView>(R.id.scrollView)
-        scollView?.scrollTo(0, 0);
+//        val scoreText = myView?.findViewById<TextView>(R.id.scoreText)
+//        scoreText?.text = "Votre Score est : $score"
+//
+//        //      pour revenir en haut
+//        val scollView = myView?.findViewById<ScrollView>(R.id.scrollView)
+//        scollView?.scrollTo(0, 0);
+
+        dialog = myView?.let { Dialog(it?.context) }!!
+        if(score >= 7 )  openWinDialog(score)
+        else openLoseDialog(score)
+
     }
+
+    private fun openWinDialog(score: Int) {
+        dialog.setContentView(R.layout.custom_dialog_valider)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val imageView = dialog.findViewById<ImageView>(R.id.imageViewClose)
+        val btnOk = dialog.findViewById<Button>(R.id.btnOk)
+        val textScore = dialog.findViewById<TextView>(R.id.textScore)
+        textScore.text = "Votre score est : $score"
+        dialog.show()
+
+        imageView.setOnClickListener {
+            dialog.dismiss()
+
+        }
+        btnOk.setOnClickListener {
+            dialog.dismiss()
+
+        }
+
+    }
+
+    private fun openLoseDialog(score: Int) {
+        dialog.setContentView(R.layout.custom_dialog_echouer)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val imageView = dialog.findViewById<ImageView>(R.id.imageViewClose)
+        val btnOk = dialog.findViewById<Button>(R.id.btnOk)
+        val textScore = dialog.findViewById<TextView>(R.id.textScore)
+        textScore.text = "Votre score est : $score"
+        dialog.show()
+
+        imageView.setOnClickListener {
+            dialog.dismiss()
+
+        }
+        btnOk.setOnClickListener {
+            dialog.dismiss()
+
+        }
+
+    }
+
 
 }

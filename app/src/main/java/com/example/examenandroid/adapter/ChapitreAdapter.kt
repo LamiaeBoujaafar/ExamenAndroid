@@ -14,6 +14,8 @@ class ChapitreAdapter(context: FragmentActivity?, private val chapitres: ArrayLi
     var myActivity: ItemClicked
 
     init {
+        //      Comme notre activite implement l'interface ItemClicked on peut caster notre context en type ItemClicked
+        //      afin d'appeler la methode onItemClicked
         myActivity = context as ItemClicked
     }
 

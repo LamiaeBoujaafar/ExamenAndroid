@@ -49,7 +49,6 @@
                 android:buttonTint="@color/purple_700"
                 android:layout_margin="5dp"
                 android:textSize="17dp"
-                android:fontFamily="sans-serif-condensed-light"
                 android:text="RadioButton"
                 android:textColor="@color/purple_700" />
             <RadioButton

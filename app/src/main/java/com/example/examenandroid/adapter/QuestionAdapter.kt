@@ -30,8 +30,6 @@ class QuestionAdapter(context: FragmentActivity?, private val qcmArray: ArrayLis
 
             myActivity.afficherScore(score)
         }
-        var reponses= mapOf<Int, String>()
-        var myOnRadioItemClickListener : IAfficheScore
 
     }
     interface IAfficheScore

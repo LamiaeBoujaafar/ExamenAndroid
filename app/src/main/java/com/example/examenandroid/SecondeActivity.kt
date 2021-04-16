@@ -16,52 +16,36 @@ import com.example.examenandroid.model.QcmDBHelper
 class SecondeActivity : AppCompatActivity(), ChapitreAdapter.ItemClicked{
 
     //private lateinit var binding : ActivitySecondeBinding
-    val manager = this.supportFragmentManager
+    private val manager = this.supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seconde)
 
-        val frag = QcmQuestionFragment()
-
+        //      Ajouter le fragment qui affiche les chapitres a notre second activity
         val trans = manager.beginTransaction()
         val fragChapitre = ChapitreFragment()
         if(!fragChapitre.isAdded) {
             trans.add(R.id.conteneur, fragChapitre)
             trans.commit()
         }
-
-//        manager.beginTransaction()
-//                .show(manager.findFragmentById(R.id.chapitreFragment)!!)
-//                .hide(manager.findFragmentById(R.id.fragment5)!!)
-//                .commit()
-
-
-
     }
 
 
     override fun onItemClicked(chapitre: Chapitre) {
         Log.i("chapitre", chapitre.titre.toString())
-        val frag = QcmQuestionFragment()
+
+        val qcmQuestionFragment = QcmQuestionFragment()
 
         val trans = manager.beginTransaction()
-        val fragChapitre = ChapitreFragment()
-        if(!frag.isAdded) {
+        if(!qcmQuestionFragment.isAdded) {
             val myBundle = Bundle()
             myBundle.putParcelable("chapitre", chapitre)
-            frag.arguments = myBundle
-            trans.add(R.id.conteneur, frag)
+            qcmQuestionFragment.arguments = myBundle
+            trans.add(R.id.conteneur, qcmQuestionFragment)
             trans.addToBackStack(null)
             trans.commit()
         }
-//
-//        manager.beginTransaction()
-//                .show(manager.findFragmentById(R.id.fragment5)!!)
-//                .addToBackStack(null)
-//                .commit()
-
-        //findViewById<TextView>(R.id.fragment4TextView).text = chapitre.titre.toString()
 
     }
 

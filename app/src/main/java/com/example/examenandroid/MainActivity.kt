@@ -18,16 +18,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //      Utilisation du binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        //      recuperation des donnees entree par utilisateur
         val loginBtn = binding.loginBtn
         val emailInput = binding.emailInput
         val mdpInput = binding.mdpInput
+
+        //      fonction pour recuperer tous les utilisateurs stocker dans bd
         val users = DataManager.recupererUsers(myDBHelper)
+
         val qcmDBHelper = QcmDBHelper(this)
         loginBtn.setOnClickListener {
+            //      Remplissage de la base de donnees
 //            FillDB.FillChapitre(qcmDBHelper)
 //            FillDB.FillUser(qcmDBHelper)
 //            FillDB.FillQuestion(qcmDBHelper)

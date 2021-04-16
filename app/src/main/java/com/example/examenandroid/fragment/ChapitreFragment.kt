@@ -23,19 +23,6 @@ class ChapitreFragment : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val myDBHelper = this.activity?.let { QcmDBHelper(it) }
-        val chapitres : ArrayList<Chapitre> = DataManager.recupererChapitre(myDBHelper!!)
-        recyclerViewChapitre = myView?.findViewById(R.id.recyclerViewChapitre)
-
-        layoutManager = LinearLayoutManager(this.activity)
-        recyclerViewChapitre?.layoutManager = layoutManager
-        myAdapter = ChapitreAdapter(this.activity, chapitres)
-        recyclerViewChapitre?.adapter = myAdapter
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -56,16 +43,5 @@ class ChapitreFragment : Fragment(){
         myAdapter = ChapitreAdapter(this.activity, chapitres)
         recyclerViewChapitre?.adapter = myAdapter
     }
-
-//    override fun onItemClicked(chapitre: Chapitre) {
-//        Log.i("ero", "")
-//        val manager = this.activity?.supportFragmentManager
-//
-//       if (manager != null) {
-//            manager.beginTransaction()
-//    //                .show(manager.findFragmentById(R.id.qcmFragment)!!)
-//                    .commit()
-//        }
-//    }
 
 }
