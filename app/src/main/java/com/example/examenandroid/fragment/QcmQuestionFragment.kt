@@ -29,6 +29,7 @@ class QcmQuestionFragment : Fragment(), QuestionAdapter.IAfficheScore {
     var recyclerViewChapitre : RecyclerView? = null
     var layoutManager : RecyclerView.LayoutManager? = null
     lateinit var dialog : Dialog
+    lateinit var dialogResult : Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,33 +73,52 @@ class QcmQuestionFragment : Fragment(), QuestionAdapter.IAfficheScore {
         recyclerViewChapitre?.adapter = myAdapter
 
         var validetBtn = myView?.findViewById<Button>(R.id.validetBtn)
+        validetBtn?.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                dialogResult = myView?.let { Dialog(it?.context) }!!
+                dialogResult.setContentView(R.layout.custom_dialog_result)
+                dialogResult.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                val revisertBtnDialog = dialogResult.findViewById<Button>(R.id.revisertBtnDialog)
+                val validerBtnDialog = dialogResult.findViewById<Button>(R.id.validerBtnDialog)
+                val imageView = dialogResult.findViewById<ImageView>(R.id.imageViewClose)
+                dialogResult.show()
+                revisertBtnDialog.setOnClickListener {
+                    val scollView = myView?.findViewById<ScrollView>(R.id.scrollView)
+                    scollView?.scrollTo(0, 0);
+                    dialogResult.dismiss()
+                }
+                imageView.setOnClickListener {
+                    dialogResult.dismiss()
+                }
+                validerBtnDialog.setOnClickListener {
+                    val scollView = myView?.findViewById<ScrollView>(R.id.scrollView)
+                    scollView?.scrollTo(0, 0);
+                    myAdapter = QuestionAdapter(activity, arrayQuestionReponse, reponses, true, this@QcmQuestionFragment)
+                    recyclerViewChapitre?.adapter = myAdapter
+                    dialogResult.dismiss()
 
-        validetBtn?.setOnClickListener {
-
-            // pour afficher une alert lors du click sur valider
-            val builder = AlertDialog.Builder(this.activity)
-            builder.setTitle("Validez-vous vos réponses")
-            builder.setMessage("Voulez-vous vraiment valider vos réponses ?")
-
-            //      button cancel pour annuler et reviser ses reponses
-            builder.setNegativeButton(android.R.string.no) { dialog, which ->
-                Toast.makeText(this.context,
-                    android.R.string.no, Toast.LENGTH_SHORT).show()
+                }
             }
-            //      button resultat pour valider les choix et afficher le score
-            builder.setNeutralButton("Résultat") { dialog, which ->
-                Toast.makeText(this.context,
-                    "Résultat", Toast.LENGTH_SHORT).show()
 
-
-                myAdapter = QuestionAdapter(this.activity, arrayQuestionReponse, reponses, true, this)
-                recyclerViewChapitre?.adapter = myAdapter
-            }
-            builder.show()
-
-            //openWinDialog()
-
-        }
+        })
+//        validetBtn?.setOnClickListener {
+//            //      pour afficher une alert lors du click sur valider
+//            val builder = AlertDialog.Builder(this.activity)
+//            builder.setTitle("Validez-vous vos réponses")
+//            builder.setMessage("Voulez-vous vraiment valider vos réponses ?")
+//
+//            //      button cancel pour annuler et reviser ses reponses
+//            builder.setNegativeButton(android.R.string.no) { dialog, which ->
+//                Toast.makeText(this.context,
+//                    android.R.string.no, Toast.LENGTH_SHORT).show()
+//            }
+//            //      button resultat pour valider les choix et afficher le score
+//            builder.setNeutralButton("Résultat") { dialog, which ->
+//                myAdapter = QuestionAdapter(this.activity, arrayQuestionReponse, reponses, true, this)
+//                recyclerViewChapitre?.adapter = myAdapter
+//            }
+//            builder.show()
+//        }
     }
 
     override fun afficherScore(score: Int) {
@@ -130,9 +150,7 @@ class QcmQuestionFragment : Fragment(), QuestionAdapter.IAfficheScore {
         }
         btnOk.setOnClickListener {
             dialog.dismiss()
-
         }
-
     }
 
     private fun openLoseDialog(score: Int) {
