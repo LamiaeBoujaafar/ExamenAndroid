@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import androidx.fragment.app.Fragment
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,12 @@ class QcmQuestionFragment : Fragment(), QuestionAdapter.IAfficheScore {
     var layoutManager : RecyclerView.LayoutManager? = null
     lateinit var dialog : Dialog
     lateinit var dialogResult : Dialog
+
+    lateinit var myIreset : Ireset
+
+//    init {
+//        myIreset = activity as Ireset
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,34 +98,27 @@ class QcmQuestionFragment : Fragment(), QuestionAdapter.IAfficheScore {
                     dialogResult.dismiss()
                 }
                 validerBtnDialog.setOnClickListener {
-                    val scollView = myView?.findViewById<ScrollView>(R.id.scrollView)
-                    scollView?.scrollTo(0, 0);
+//                    val scollView = myView?.findViewById<ScrollView>(R.id.scrollView)
+//                    scollView?.scrollTo(0, 0);
+
+
+
                     myAdapter = QuestionAdapter(activity, arrayQuestionReponse, reponses, true, this@QcmQuestionFragment)
                     recyclerViewChapitre?.adapter = myAdapter
                     dialogResult.dismiss()
-
+                    validetBtn.isEnabled = false
                 }
             }
 
         })
-//        validetBtn?.setOnClickListener {
-//            //      pour afficher une alert lors du click sur valider
-//            val builder = AlertDialog.Builder(this.activity)
-//            builder.setTitle("Validez-vous vos réponses")
-//            builder.setMessage("Voulez-vous vraiment valider vos réponses ?")
-//
-//            //      button cancel pour annuler et reviser ses reponses
-//            builder.setNegativeButton(android.R.string.no) { dialog, which ->
-//                Toast.makeText(this.context,
-//                    android.R.string.no, Toast.LENGTH_SHORT).show()
-//            }
-//            //      button resultat pour valider les choix et afficher le score
-//            builder.setNeutralButton("Résultat") { dialog, which ->
-//                myAdapter = QuestionAdapter(this.activity, arrayQuestionReponse, reponses, true, this)
-//                recyclerViewChapitre?.adapter = myAdapter
-//            }
-//            builder.show()
-//        }
+
+        val resetBtn = myView?.findViewById<Button>(R.id.resetBtn)
+        resetBtn?.setOnClickListener(View.OnClickListener {
+            myIreset = activity as Ireset
+            myIreset.reset()
+            Log.i("resett", "test")
+        })
+
     }
 
     override fun afficherScore(score: Int) {
@@ -171,6 +171,10 @@ class QcmQuestionFragment : Fragment(), QuestionAdapter.IAfficheScore {
 
         }
 
+    }
+
+    interface Ireset {
+        fun reset();
     }
 
 

@@ -8,10 +8,13 @@
     android:gravity="center"
     android:background="@drawable/background"
     >
+
     <ImageView
-        android:layout_width="111dp"
-        android:layout_height="108dp"
-        android:src="@drawable/ic_baseline_supervised_user_circle_24" />
+
+        android:layout_width="238dp"
+        android:layout_height="194dp"
+        android:src="@drawable/kotlin_android" />
+
     <TextView
         android:id="@+id/scoreText"
         android:layout_width="match_parent"
@@ -19,7 +22,7 @@
         android:layout_marginBottom="50dp"
         android:gravity="center"
         android:text="@string/bonjour"
-        android:textColor="#fff"
+        android:textColor="#B2D640"
         android:textSize="40sp"
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
@@ -64,7 +67,9 @@
         android:padding="15dp"
         android:shadowColor="@android:color/transparent"
         android:text="Log In"
-        app:backgroundTint="#904e95" />
+        android:textColor="#A45282"
+        android:textSize="24sp"
+        app:backgroundTint="#B2D640" />
 
 
 
