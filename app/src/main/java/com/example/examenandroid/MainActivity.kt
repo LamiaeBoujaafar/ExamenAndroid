@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val qcmDBHelper = QcmDBHelper(this)
         loginBtn.setOnClickListener {
-            //      Remplissage de la base de donnees
+//                  Remplissage de la base de donnees
 //            FillDB.FillChapitre(qcmDBHelper)
 //            FillDB.FillUser(qcmDBHelper)
 //            FillDB.FillQuestion(qcmDBHelper)
@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(myIntent)
                 emailInput.text.clear()
                 mdpInput.text.clear()
+
             }else{
                 Toast.makeText(this, "mot de passe ou email incorrecte(s)", Toast.LENGTH_SHORT).show()
             }
