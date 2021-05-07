@@ -1,4 +1,4 @@
-package com.example.examenandroid.fragment
+package com.example.examenandroid.model
 
 import android.os.Parcel
 import android.os.Parcelable

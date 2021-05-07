@@ -9,11 +9,10 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.examenandroid.R
-import com.example.examenandroid.fragment.QuestionReponseTest
+import com.example.examenandroid.model.QuestionReponseTest
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap

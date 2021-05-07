@@ -1,6 +1,5 @@
 package com.example.examenandroid.model
 import android.content.ContentValues
-import com.example.examenandroid.fragment.QuestionReponseTest
 import com.example.examenandroid.model.QcmContract.Chapitre.COLUMN_ID
 import com.example.examenandroid.model.QcmContract.Chapitre.COLUMN_TITRE
 import com.example.examenandroid.model.QcmContract.Chapitre.TABLE_NAME_CHAPITRE
