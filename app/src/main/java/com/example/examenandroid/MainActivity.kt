@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             val email = emailInput.text.toString()
             val mdp = mdpInput.text.toString()
 
-            if(DataManager.authentication("lamiae20ber@gmail.com","lamiae",users)){
+            if(DataManager.authentication(email,mdp,users)){
                 val myIntent = Intent(this, SecondeActivity::class.java)
                 startActivity(myIntent)
                 emailInput.text.clear()

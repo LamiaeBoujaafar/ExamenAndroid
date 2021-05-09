@@ -34,8 +34,11 @@ class ChapitreFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Recuperer les chapitre a partir du base de donnees
         val myDBHelper = this.activity?.let { QcmDBHelper(it) }
         val chapitres : ArrayList<Chapitre> = DataManager.recupererChapitre(myDBHelper!!)
+
+        //appeler adapter pour afficher la liste des chapitre
         recyclerViewChapitre = myView?.findViewById(R.id.recyclerViewChapitre)
 
         layoutManager = LinearLayoutManager(this.activity)
