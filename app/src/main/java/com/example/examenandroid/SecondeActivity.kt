@@ -58,8 +58,6 @@ class SecondeActivity : AppCompatActivity(), ChapitreAdapter.ItemClicked, QcmQue
 
             trans.remove(qcmQuestionFragment!!)
             trans.commit()
-            Log.i("resettt", "main")
-            Log.i("resettt", qcmQuestionFragment!!.tag.toString())
 
         }
     }

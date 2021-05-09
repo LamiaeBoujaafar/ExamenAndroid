@@ -3,22 +3,18 @@ package com.example.examenandroid.model
 import android.os.Parcel
 import android.os.Parcelable
 
-class QuestionReponse( var id_question:Int,var question: String?,var choix1 : String?,var choix2 : String?,var choix3 : String?,var reponseCorrecte : String?):Parcelable {
+class QuestionReponse(var id_question:Int, var question: String?, var choix: Array<String?>, var reponseCorrecte: String?) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
+            parcel.createStringArray() as Array<String?>,
             parcel.readString()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id_question)
         parcel.writeString(question)
-        parcel.writeString(choix1)
-        parcel.writeString(choix2)
-        parcel.writeString(choix3)
+        parcel.writeStringArray(choix)
         parcel.writeString(reponseCorrecte)
     }
 
@@ -35,5 +31,4 @@ class QuestionReponse( var id_question:Int,var question: String?,var choix1 : St
             return arrayOfNulls(size)
         }
     }
-
 }

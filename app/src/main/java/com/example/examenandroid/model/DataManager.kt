@@ -105,39 +105,8 @@ object DataManager {
         }
         return false;
     }
-    //FONCTIONS POUR Question et les reponses
-    //fonction qui recupere les questions avec leurs reponses
-
-//    fun recupererQuestionReponse(myUserDBHelper: QcmDBHelper, id_chapitre :Int) : ArrayList<QuestionReponse> {
-//        val db   = myUserDBHelper.readableDatabase
-//        val question_reponses = java.util.ArrayList<QuestionReponse>()
-//        val query = "SELECT" + Question.COLUMN_ID + " , " + Question.COLUMN_QUESTION + " , " + Question.COLUMN_ID_CHAPITRE +
-//                " , " + Reponse.COLUMN_ID + " , " + Reponse.COLUMN_REPONSE + " , " + Reponse.COLUMN_EST_CORRECTE +
-//                " FROM " + TABLE_NAME_QUESTION +
-//                " JOIN " + Reponse.TABLE_NAME_REPONSE + " ON " +  Question.COLUMN_ID + " = " + Reponse.COLUMN_ID +
-//                " WHERE " + Question.COLUMN_ID_CHAPITRE + " = ?"
-//
-//        val cursor = db.rawQuery(
-//                query,
-//                arrayOf(id_chapitre.toString())
-//        )
-//        with(cursor) {
-//            while (moveToNext()) {
-//                val question_id = getInt( getColumnIndexOrThrow( Question.COLUMN_ID  ) )
-//                val question = getString( getColumnIndexOrThrow( Question.COLUMN_QUESTION ) )
-//                val id_chapitre = getInt( getColumnIndexOrThrow( Question.COLUMN_ID_CHAPITRE ) )
-//                val reponse_id = getInt( getColumnIndexOrThrow( Reponse.COLUMN_ID ) )
-//                val reponse = getString( getColumnIndexOrThrow( Reponse.COLUMN_REPONSE ) )
-//                val est_correcte = getInt( getColumnIndexOrThrow( Reponse.COLUMN_EST_CORRECTE ) ) > 0
-//                val question_reponse = QuestionReponse(question_id, question,id_chapitre,reponse_id,reponse,est_correcte)
-//                question_reponses.add(question_reponse)
-//            }
-//            return question_reponses
-//        }
-//    }
 
     //FONCTION POUR RECUPERER LES QUESTIONS SELON CHAPITRE
-
     fun recupererQuestionParChapitre(myUserDBHelper: QcmDBHelper,id_chapitre: Int): ArrayList<com.example.examenandroid.model.Question>{
         val db   = myUserDBHelper.readableDatabase
         val questions = java.util.ArrayList<com.example.examenandroid.model.Question>()
@@ -189,25 +158,9 @@ object DataManager {
             return reponses
         }
     }
-//    fun recupererQuestionReponse(myUserDBHelper: QcmDBHelper, id_chapitre :Int) : ArrayList<QuestionReponse>{
-//        val questionReponse = ArrayList<QuestionReponse>()
-//        val questions : ArrayList<com.example.examenandroid.model.Question> = recupererQuestionParChapitre(myUserDBHelper,id_chapitre)
-//        for(question in questions){
-//            val reponses : ArrayList<com.example.examenandroid.model.Reponse> = recupererReponseParIdQuestion(myUserDBHelper,question.id)
-//            var reponseCorrect = ""
-//            for (reponse in reponses){
-//                if(reponse.estCorrecte == true){
-//                    reponseCorrect = reponse.reponse.toString()
-//                }
-//            }
-//            val result = QuestionReponse(question.id,question.question,reponses[0].reponse,reponses[1].reponse,reponses[2].reponse,reponseCorrect)
-//            questionReponse.add(result)
-//        }
-//        return questionReponse
-//    }
 
-    fun recupererQuestionReponse(myUserDBHelper: QcmDBHelper, id_chapitre :Int) : ArrayList<QuestionReponseTest>{
-        val questionReponseTest = ArrayList<QuestionReponseTest>()
+    fun recupererQuestionReponse(myUserDBHelper: QcmDBHelper, id_chapitre :Int) : ArrayList<QuestionReponse>{
+        val questionReponseTest = ArrayList<QuestionReponse>()
         val questions : ArrayList<com.example.examenandroid.model.Question> = recupererQuestionParChapitre(myUserDBHelper,id_chapitre)
         for(question in questions){
             val reponses : ArrayList<com.example.examenandroid.model.Reponse> = recupererReponseParIdQuestion(myUserDBHelper,question.id)
@@ -218,7 +171,7 @@ object DataManager {
                 }
             }
             val choixArray = arrayOf(reponses[0].reponse, reponses[1].reponse, reponses[2].reponse)
-            val result = QuestionReponseTest(question.id,question.question, choixArray,reponseCorrect)
+            val result = QuestionReponse(question.id,question.question, choixArray,reponseCorrect)
             questionReponseTest.add(result)
         }
         return questionReponseTest

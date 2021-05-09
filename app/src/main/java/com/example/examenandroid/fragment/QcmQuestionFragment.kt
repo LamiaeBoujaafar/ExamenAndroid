@@ -34,10 +34,6 @@ class QcmQuestionFragment : Fragment(), QuestionAdapter.IAfficheScore {
 
     lateinit var myIreset : Ireset
 
-//    init {
-//        myIreset = activity as Ireset
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -122,13 +118,6 @@ class QcmQuestionFragment : Fragment(), QuestionAdapter.IAfficheScore {
     }
 
     override fun afficherScore(score: Int) {
-//        val scoreText = myView?.findViewById<TextView>(R.id.scoreText)
-//        scoreText?.text = "Votre Score est : $score"
-//
-//        //      pour revenir en haut
-//        val scollView = myView?.findViewById<ScrollView>(R.id.scrollView)
-//        scollView?.scrollTo(0, 0);
-
         dialog = myView?.let { Dialog(it?.context) }!!
         if(score >= 7 )  openWinDialog(score)
         else openLoseDialog(score)

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".activity_item_chapitre"
     android:layout_margin="6dp"
     android:id="@+id/Card_View"
     android:clickable="true"
@@ -37,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginBottom="15dp"
-            android:text="firstNameItem"
+            android:text="@string/firstnameitem"
             android:textColor="@color/white"
             android:textSize="24sp" />
     </LinearLayout>

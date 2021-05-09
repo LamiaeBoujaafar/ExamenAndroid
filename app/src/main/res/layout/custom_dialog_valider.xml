@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-
             >
 
             <ImageView
@@ -38,10 +37,10 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="Validé"
                 android:textColor="@color/colorGreen"
                 android:textSize="36sp"
-                android:layout_marginTop="15dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/imageViewClose"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +64,7 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
                 android:gravity="center"
-                android:text="Test"
+                android:text="Score"
                 android:textColor="@color/colorGreen"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"

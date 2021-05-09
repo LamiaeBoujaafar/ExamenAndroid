@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:background="@drawable/background"
-    >
+    android:gravity="center"
+    android:orientation="vertical">
 
     <ImageView
 
@@ -32,28 +31,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:padding="15dp"
         android:background="@drawable/shapeemail"
         android:drawableLeft="@drawable/ic_baseline_person_24"
         android:drawablePadding="10dp"
         android:hint="Email"
+        android:padding="15dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textColorHighlight="@color/white"/>
+        android:textColorHighlight="@color/white"
+        android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/mdpInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:padding="15dp"
         android:background="@drawable/shapeemail"
         android:drawableLeft="@drawable/ic_baseline_lock_24"
         android:drawablePadding="10dp"
         android:hint="Mot de passe"
+        android:padding="15dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textColorHighlight="@color/white"/>
+        android:textColorHighlight="@color/white"
+        android:textColorHint="@color/white" />
 
     <Button
         android:id="@+id/loginBtn"
@@ -70,7 +69,6 @@
         android:textColor="#A45282"
         android:textSize="24sp"
         app:backgroundTint="#B2D640" />
-
 
 
 </LinearLayout>

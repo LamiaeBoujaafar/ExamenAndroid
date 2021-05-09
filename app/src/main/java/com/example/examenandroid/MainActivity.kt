@@ -30,13 +30,16 @@ class MainActivity : AppCompatActivity() {
         //      fonction pour recuperer tous les utilisateurs stocker dans bd
         val users = DataManager.recupererUsers(myDBHelper)
 
-        val qcmDBHelper = QcmDBHelper(this)
+//        val qcmDBHelper = QcmDBHelper(this)
+
+//        Remplissage de la base de donnees
+//        FillDB.FillChapitre(qcmDBHelper)
+//        FillDB.FillUser(qcmDBHelper)
+//        FillDB.FillQuestion(qcmDBHelper)
+//        FillDB.FillReponse(qcmDBHelper)
         loginBtn.setOnClickListener {
-//                  Remplissage de la base de donnees
-//            FillDB.FillChapitre(qcmDBHelper)
-//            FillDB.FillUser(qcmDBHelper)
-//            FillDB.FillQuestion(qcmDBHelper)
-//            FillDB.FillReponse(qcmDBHelper)
+
+
             val email = emailInput.text.toString()
             val mdp = mdpInput.text.toString()
 

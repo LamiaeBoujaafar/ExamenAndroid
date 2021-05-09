@@ -1,6 +1,7 @@
 package com.example.examenandroid.model
 
 import android.content.Context
+import android.util.Log
 
 class FillDB (){
     companion object{
@@ -10,14 +11,15 @@ class FillDB (){
             DataManager.ajouterUser(myQcmHelper,User(3,"prof","prof","prof@gmail.com"))
 
         }
+
         fun FillChapitre(myQcmHelper : QcmDBHelper){
             DataManager.ajouterChapitre(myQcmHelper, Chapitre(1,"Introduction au développement Android avec Android Studio"))
             DataManager.ajouterChapitre(myQcmHelper, Chapitre(2,"Introduction au langage Kotlin"))
             DataManager.ajouterChapitre(myQcmHelper, Chapitre(3,"Les activitées"))
             DataManager.ajouterChapitre(myQcmHelper, Chapitre(4,"Stockage et SQLite"))
             DataManager.ajouterChapitre(myQcmHelper, Chapitre(5,"Les fragments"))
-
         }
+
         fun FillReponse(myQcmHelper : QcmDBHelper){
             //CHAPITRE 1
             //REPONSE DE QUESTION 1
@@ -189,6 +191,7 @@ class FillDB (){
             DataManager.ajouterReponses(myQcmHelper,Reponse(119,"Renvoie le répertoire externe \"public\" sous name",false,40))
             DataManager.ajouterReponses(myQcmHelper,Reponse(120,"Renvoie le répertoire externe \"privé\" sous \"name\"",true,40))
         }
+
         fun FillQuestion(myQcmHelper : QcmDBHelper){
             //AJOUTER QUESTIONS POUR CHAPITRE 1
             DataManager.ajouterQuestion(myQcmHelper, Question(1,"Qu'est-ce qu'Android?",1))
@@ -237,7 +240,7 @@ class FillDB (){
             DataManager.ajouterQuestion(myQcmHelper, Question(37,"Les fichiers SharedPreferences sont utilisés pour manipuler?",4))
             DataManager.ajouterQuestion(myQcmHelper, Question(38,"getSharedPreferences(),Accède aux préférences au niveau de?",4))
             DataManager.ajouterQuestion(myQcmHelper, Question(39,"Si vous voulez lire/écrire dns le stockage externe du périphérique, vous devez demander l' autorisation?",4))
-            DataManager.ajouterQuestion(myQcmHelper, Question(30,"Que fais la fonction getExternalFilesDir (\" name \")?",4))
+            DataManager.ajouterQuestion(myQcmHelper, Question(40,"Que fais la fonction getExternalFilesDir (\" name \")?",4))
         }
     }
 }
